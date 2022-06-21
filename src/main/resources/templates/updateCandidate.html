@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -14,8 +13,8 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-    <title>Работа мечты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Работа мечты!</title>
 </head>
 <body>
 <div class="container">
@@ -40,19 +39,19 @@
                 Новый кандидат.
             </div>
             <div class="card-body" style="background-color: lightgrey">
-                <form th:action="@{/createCandidate}" method="POST">
+                <form th:action="@{/updateCandidate}" method="POST" th:object="${post}">
                     <div class="form-group">
-                        <input type="hidden" name="id" value="0"/>
+                        <input type="hidden" name="id" th:field="*{id}"/>
                         <label for="name">Имя
-                            <input type="text" class="form-control" name="name" id="name" placeholder = "Введите кандидата">
+                            <input type="text" class="form-control" name="name" id="name" th:field="*{name}" placeholder = "Введите кандидата">
                         </label>
                         <br>
                         <label for="desc">Описание
-                            <input type="text" class="form-control" name="desc" id="desc" placeholder = "Введите описание кандидата">
+                            <input type="text" class="form-control" name="desc" id=desc th:field="*{desc}" placeholder = "Введите описание кандидата">
                         </label>
                         <br>
                         <label for="created">Дата ввода кандидата
-                            <input type="text" class="form-control" name="created" id="created" placeholder = "Дата ввода кандидата">
+                            <input type="text" class="form-control" name="created" id="created" th:field="*{created}" placeholder = "Дата ввода кандидата">
                         </label>
                         <br>
                     </div>

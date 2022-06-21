@@ -1,16 +1,15 @@
 package ru.job4j.dreamjob.store;
 
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.Post;
-
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CandidateStore {
     private static final CandidateStore INST = new CandidateStore();
-
+    private static final AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private CandidateStore() {
@@ -26,7 +25,18 @@ public class CandidateStore {
         return INST;
     }
 
+    public void save(Candidate candidate) {
+        if (candidate.getId() == 0) {
+            candidate.setId(CANDIDATE_ID.getAndIncrement());
+        }
+        candidates.put(candidate.getId(), candidate);
+    }
+
     public Collection<Candidate> findAll() {
         return candidates.values();
+    }
+
+    public Candidate findById(int id) {
+        return candidates.get(id);
     }
 }
