@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Post {
     private int id;
