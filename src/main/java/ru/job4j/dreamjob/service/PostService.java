@@ -11,7 +11,7 @@ import java.util.Collection;
 @ThreadSafe
 public class PostService {
 
-    private PostStore postStore;
+    private final PostStore postStore;
 
     public PostService(PostStore postStore) {
         this.postStore = postStore;
