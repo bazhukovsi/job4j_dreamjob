@@ -9,7 +9,11 @@ import java.util.Collection;
 @Service
 public class PostService {
 
-    private final PostStore postStore = PostStore.instOf();
+    private PostStore postStore;
+
+    public PostService(PostStore postStore) {
+        this.postStore = postStore;
+    }
 
     public Collection<Post> findAll() {
         return postStore.findAll();
