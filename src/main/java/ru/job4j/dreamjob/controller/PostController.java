@@ -36,9 +36,7 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post, @RequestParam(name = "city.id") int id) {
-        City city = cityService.findById(id);
-        post.setCity(city);
-        postService.save(post);
+        postService.add(post);
         return "redirect:/posts";
     }
 
@@ -53,7 +51,7 @@ public class PostController {
     public String updatePost(@ModelAttribute Post post, @RequestParam(name = "city.id") int id) {
         City city = cityService.findById(id);
         post.setCity(city);
-        postService.save(post);
+        postService.update(post);
         return "redirect:/posts";
     }
 }
