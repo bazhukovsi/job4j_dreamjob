@@ -18,11 +18,11 @@ public class CandidateStore {
 
     private CandidateStore() {
         candidates.put(1, new Candidate(1, "Junior Java Job", "junior",
-                LocalDate.of(2022, 1, 10)));
+                LocalDate.of(2022, 1, 10), new byte[]{}));
         candidates.put(2, new Candidate(2, "Middle Java Job", "middle",
-                LocalDate.of(2022, 2, 10)));
+                LocalDate.of(2022, 2, 10), new byte[]{}));
         candidates.put(3, new Candidate(3, "Senior Java Job", "senior",
-                LocalDate.of(2022, 3, 15)));
+                LocalDate.of(2022, 3, 15), new byte[]{}));
     }
 
     public static CandidateStore instOf() {

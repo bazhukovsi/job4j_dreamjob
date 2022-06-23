@@ -42,18 +42,12 @@
                 <form th:action="@{/updateCandidate}" method="POST" th:object="${post}" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" name="id" th:field="*{id}"/>
-                        <label for="name">Имя
+                        <label for="name">Имя</label>
                             <input type="text" class="form-control" name="name" id="name" th:field="*{name}" placeholder = "Введите кандидата">
-                        </label>
-                        <br>
-                        <label for="desc">Описание
-                            <input type="text" class="form-control" name="desc" id=desc th:field="*{desc}" placeholder = "Введите описание кандидата">
-                        </label>
-                        <br>
-                        <label for="created">Дата ввода кандидата
+                        <label for="description">Описание</label>
+                            <input type="text" class="form-control" name="description" id=description th:field="*{description}" placeholder = "Введите описание кандидата">
+                        <label for="created">Дата ввода кандидата </label>
                             <input type="text" class="form-control" name="created" id="created" th:field="*{created}" placeholder = "Дата ввода кандидата">
-                        </label>
-                        <br>
                         <div class="form-group">
                             <label for="name">Фотография</label>
                             <input type="file" class="form-control" name="file" id="file">

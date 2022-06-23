@@ -2,7 +2,6 @@ package ru.job4j.dreamjob.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.City;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

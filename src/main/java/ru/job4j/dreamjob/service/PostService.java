@@ -4,7 +4,6 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.PostDBStore;
-
 import java.util.Collection;
 
 @Service
@@ -29,8 +28,8 @@ public class PostService {
         postDBStore.add(post);
     }
 
-    public void update(Post post) {
-        postDBStore.update(post);
+    public boolean update(Post post) {
+        return postDBStore.update(post);
     }
 
 }

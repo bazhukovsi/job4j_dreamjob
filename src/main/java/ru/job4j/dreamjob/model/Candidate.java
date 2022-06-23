@@ -1,20 +1,22 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Candidate {
     private int id;
     private String name;
-    private String desc;
+    private String description;
     private LocalDate created;
     private byte[] photo;
 
-    public Candidate(int id, String name, String desc, LocalDate created) {
+    public Candidate(int id, String name, String description, LocalDate created, byte[] photo) {
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.created = created;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -33,12 +35,12 @@ public class Candidate {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDate getCreated() {
@@ -66,12 +68,14 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id && Objects.equals(name, candidate.name) && Objects.equals(desc, candidate.desc) && Objects.equals(created, candidate.created);
+        return id == candidate.id && Objects.equals(name, candidate.name) && Objects.equals(description, candidate.description) && Objects.equals(created, candidate.created) && Arrays.equals(photo, candidate.photo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, desc, created);
+        int result = Objects.hash(id, name, description, created);
+        result = 31 * result + Arrays.hashCode(photo);
+        return result;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class Candidate {
         return "Candidate{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", desc='" + desc + '\''
+                + ", description='" + description + '\''
                 + ", created=" + created
                 + '}';
     }
