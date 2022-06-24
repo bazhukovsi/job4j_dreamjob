@@ -1,6 +1,8 @@
 package ru.job4j.dreamjob.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Post;
 import java.sql.Connection;
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Repository
 public class PostDBStore {
-
+    private static final Logger LOG = LoggerFactory.getLogger(PostDBStore.class.getName());
     private final BasicDataSource pool;
 
     public PostDBStore(BasicDataSource pool) {
@@ -30,7 +32,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in findAll method (PostDBStore) : ", e);
         }
         return posts;
     }
@@ -50,7 +52,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in add method (PostDBStore) : ", e);
         }
         return post;
     }
@@ -66,7 +68,7 @@ public class PostDBStore {
             statement.setInt(4, post.getId());
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in update method (PostDBStore) : ", e);
         }
         return result;
     }
@@ -83,7 +85,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in findById method (PostDBStore) : ", e);
         }
         return null;
     }

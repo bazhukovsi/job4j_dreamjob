@@ -1,6 +1,8 @@
 package ru.job4j.dreamjob.store;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
 import java.io.ByteArrayInputStream;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @Repository
 public class CandidateDBStore {
+    private static final Logger LOG = LoggerFactory.getLogger(CandidateDBStore.class.getName());
     private final BasicDataSource pool;
 
     public CandidateDBStore(BasicDataSource pool) {
@@ -33,7 +36,7 @@ public class CandidateDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in findAll method (CandidateDBStore) : ", e);
         }
         return candidates;
     }
@@ -55,7 +58,7 @@ public class CandidateDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in add method (CandidateDBStore) : ", e);
         }
         return candidate;
     }
@@ -73,7 +76,7 @@ public class CandidateDBStore {
             statement.setInt(5, candidate.getId());
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in update method (CandidateDBStore) : ", e);
         }
         return result;
     }
@@ -91,7 +94,7 @@ public class CandidateDBStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Exception in findById method (CandidateDBStore) : ", e);
         }
         return null;
     }

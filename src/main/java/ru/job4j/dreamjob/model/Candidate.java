@@ -1,7 +1,6 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Candidate {
@@ -68,14 +67,12 @@ public class Candidate {
             return false;
         }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id && Objects.equals(name, candidate.name) && Objects.equals(description, candidate.description) && Objects.equals(created, candidate.created) && Arrays.equals(photo, candidate.photo);
+        return id == candidate.id;
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, name, description, created);
-        result = 31 * result + Arrays.hashCode(photo);
-        return result;
+        return Objects.hash(id);
     }
 
     @Override

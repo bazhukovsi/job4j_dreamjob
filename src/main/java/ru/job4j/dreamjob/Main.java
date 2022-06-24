@@ -1,16 +1,19 @@
 package ru.job4j.dreamjob;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 @SpringBootApplication
 public class Main {
-
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class.getName());
     private Properties loadDbProperties() {
         Properties cfg = new Properties();
         try (BufferedReader io = new BufferedReader(
@@ -47,6 +50,7 @@ public class Main {
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
+        LOG.info("Application has started, time= {}", LocalDateTime.now());
         System.out.println("Go to http://localhost:8080/index");
     }
 }
