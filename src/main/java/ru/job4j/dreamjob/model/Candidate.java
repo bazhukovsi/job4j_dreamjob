@@ -84,4 +84,5 @@ public class Candidate {
                 + ", created=" + created
                 + '}';
     }
+
 }
