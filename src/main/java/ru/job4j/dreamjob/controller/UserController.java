@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.controller;
 
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Controller
+@ThreadSafe
 public class UserController {
     private final UserService userService;
 
@@ -43,7 +47,7 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public String login(Model model, @ModelAttribute User user) {
+    public String login(Model model, @ModelAttribute User user, HttpServletRequest req) {
         Optional<User> userDb = userService.findUserByEmailAndPwd(
                 user.getEmail(), user.getPassword()
         );
@@ -53,7 +57,9 @@ public class UserController {
             model.addAttribute("password", "password");
             return "login";
         }
-        return "redirect:/posts";
+        HttpSession session = req.getSession();
+        session.setAttribute("user", userDb.get());
+        return "redirect:/index";
     }
 
     @GetMapping("/success")
