@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
 
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/formAddUser")
-    public String addPost(Model model) {
+    public String addUser(Model model) {
         model.addAttribute("user", new User(0, "name", "email", "qwerty"));
         return "registration";
     }
@@ -34,6 +35,27 @@ public class UserController {
         return "redirect:/success";
     }
 
+    @GetMapping("/formLoginUser")
+    public String loginUser(Model model) {
+        model.addAttribute("email", "email");
+        model.addAttribute("password", "password");
+        return "login";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model model, @ModelAttribute User user) {
+        Optional<User> userDb = userService.findUserByEmailAndPwd(
+                user.getEmail(), user.getPassword()
+        );
+        if (userDb.isEmpty()) {
+            model.addAttribute("fail", true);
+            model.addAttribute("email", "email");
+            model.addAttribute("password", "password");
+            return "login";
+        }
+        return "redirect:/posts";
+    }
+
     @GetMapping("/success")
     public String successUser(Model model) {
         return "success";
@@ -43,4 +65,5 @@ public class UserController {
     public String failUser(Model model) {
         return "fail";
     }
+
 }
