@@ -28,12 +28,6 @@ public class PostController {
     @GetMapping("/posts")
     public String posts(Model model, HttpSession session) {
         model.addAttribute("posts", postService.findAll());
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            user = new User();
-//            user.setName("Гость");
-//        }
-//        model.addAttribute("user", user);
         User user = Utility.logUser(model, session);
         model.addAttribute("user", user);
         return "posts";
@@ -43,12 +37,6 @@ public class PostController {
     public String addPost(Model model, HttpSession session) {
         model.addAttribute("post", new Post(0, "Заполните поле", false, new City()));
         model.addAttribute("cities", cityService.getAllCities());
-//        User user = (User) session.getAttribute("user");
-//        if (user == null) {
-//            user = new User();
-//            user.setName("Гость");
-//        }
-//        model.addAttribute("user", user);
         User user = Utility.logUser(model, session);
         model.addAttribute("user", user);
         return "addPost";
